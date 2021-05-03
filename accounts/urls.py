@@ -1,4 +1,4 @@
-"""MusicService URL Configuration
+"""anitosho URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -13,20 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
-
-from django.contrib import admin
-from django.urls import path, include
-
-import accounts
-from accounts.views import login_view, logout_view, register_view, music
-from audio.views import get_audio
+from django.urls import path
+from accounts import views
 
 urlpatterns = [
-    path('music', music, name="music"),
-    path('admin/', admin.site.urls),
-    path('login/', login_view),
-    path('logout/', logout_view),
-    path('register/', register_view),
-    path('audio/<str:fname>',get_audio)
+    path('music', views.music, name="music"),
 ]
