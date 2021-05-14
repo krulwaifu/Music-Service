@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<table class="fixed_headers">
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>user</th>
+      <th>file</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for a in audios %}
+      <tr>
+          <td>{{a.name}}</td>
+          <td>{{a.user}}</td>
+          <td>{{a.file}}</td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

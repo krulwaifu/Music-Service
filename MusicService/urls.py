@@ -16,19 +16,23 @@ Including another URLconf
 
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
-import account
 from accounts import views
-from audio.views import get_audio
+from accounts.views import music
+from audio.views import get_audio, upload, edit_name, delete, get_all_audio
 
 urlpatterns = [
-    path('music', music, name="music"),
+    path('music_player', music, name="music"),
     path('admin/', admin.site.urls),
     path('signin/', views.signIn),
     path('postsign/', views.postsign),
     path('logout/',views.logout,name="logout"),
     path('signup/',views.signup,name="signup"),
     path('postsignup/',views.postsignup,name="postsignup"),
-    path('audio/<str:fname>',get_audio)
+    path('audio/<str:name>',get_audio),
+    path('audio/edit/<str:name>/<str:new_name>',edit_name),
+    path('audio/delete/<str:name>',delete),
+    path('audio/upload/',upload),
+    path('audio/',get_all_audio)
 ]
