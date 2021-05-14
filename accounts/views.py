@@ -1,6 +1,9 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 import pyrebase
 from django.contrib import auth
+from django.contrib.auth import get_user_model
+
 
 # Create your views here.
 
@@ -62,5 +65,35 @@ def postsignup(request):
 def music(request):
     return render(request, "music_player.html")
 
-def user(request):
-    return render(request, )
+def get_all_users(request,):
+    global response
+    if request.method == "GET":
+        User = get_user_model()
+        users = User.objects.all()
+        context = {'users': users,
+                   'title': 'audios'}
+        return render(request, 'showUser.html', context)
+
+def get_user(request,id):
+    global response
+    if request.method == "GET":
+        User = get_user_model()
+        users = User.objects.get(id = int(id))
+        list = [users]
+        context = {'users': list,
+                   'title': 'audios'}
+    return render(request,'showUser.html', context)
+def delete_user(request,id):
+    if request.method == "GET":
+        User = get_user_model()
+        users = User.objects.get(id = int(id))
+        users.delete()
+    return HttpResponse("User deleted successfully")
+
+def edit_name(request,id,new_username):
+    if request.method == "GET":
+        User = get_user_model()
+        users = User.objects.get(id = int(id))
+        users.username = new_username
+        users.save(update_fields=["username"])
+    return HttpResponse("User edited successfully")

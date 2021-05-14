@@ -34,5 +34,9 @@ urlpatterns = [
     path('audio/edit/<str:name>/<str:new_name>',edit_name),
     path('audio/delete/<str:name>',delete),
     path('audio/upload/',upload),
-    path('audio/',get_all_audio)
+    path('audio/',get_all_audio),
+    path('users/',views.get_all_users),
+    path('user/<str:id>',views.get_user),
+    path('user/delete/<str:id>',views.delete_user),
+    path('user/edit/<str:id>/<str:new_username>',views.edit_name)
 ]
