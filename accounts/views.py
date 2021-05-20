@@ -35,7 +35,6 @@ def postsign(request):
     print(user['idToken'])
     session_id=user['idToken']
     request.session['uid']=str(session_id)
-    link=authe.send_password_reset_email(email)
     return render(request,"welcome.html",{"e":email})
 
 def logout(request):
@@ -62,8 +61,6 @@ def postsignup(request):
 
   #  database.child("users").child(uid).child("details").set(data)
     return render(request, "signIn.html")
-def music(request):
-    return render(request, "music_player.html")
 
 def get_all_users(request,):
     global response

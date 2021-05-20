@@ -18,18 +18,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from artist.views import art
 from accounts import views
 from accounts.views import music
-from audio.views import get_audio, upload, edit_name, delete, get_all_audio
+from audio.views import get_audio, upload, edit_name, delete, get_all_audio, musicpage
+from django.conf import settings
+from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
-    path('music_player', music, name="music"),
     path('admin/', admin.site.urls),
     path('signin/', views.signIn),
     path('postsign/', views.postsign),
-    path('logout/',views.logout,name="logout"),
-    path('signup/',views.signup,name="signup"),
-    path('postsignup/',views.postsignup,name="postsignup"),
+    path('logout/', views.logout, name="logout"),
+    path('signup/', views.signup, name="signup"),
+    path('postsignup/', views.postsignup, name="postsignup"),
+    path('music/', musicpage, name="music"),
+    path('artist/', art, name='art'),
     path('audio/<str:name>',get_audio),
     path('audio/edit/<str:name>/<str:new_name>',edit_name),
     path('audio/delete/<str:name>',delete),
@@ -40,3 +44,4 @@ urlpatterns = [
     path('user/delete/<str:id>',views.delete_user),
     path('user/edit/<str:id>/<str:new_username>',views.edit_name)
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

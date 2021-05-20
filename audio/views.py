@@ -46,3 +46,6 @@ def delete(request,name):
         delete_file(audio.file)
         audio.delete()
     return HttpResponse("file deleted successfully")
+
+def musicpage(request):
+    return render(request,'music_player.html')

@@ -13,7 +13,13 @@
       <tr>
           <td>{{a.name}}</td>
           <td>{{a.user}}</td>
-          <td>{{a.file}}</td>
+          <td><audio controls style="padding-top: 2%;">
+                    <source src="/media/{{a.file}}" type="audio/mp4">
+                </audio>
+          </td>
+          <td>
+              <a download href="/media/{{a.file}}" style="padding-left: 1%;"><button class="btn btn-outline-danger">Download Song</button></a>
+          </td>
       </tr>
   {% endfor %}
   </tbody>
