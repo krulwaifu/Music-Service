@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+  {% for a in audios %}
+      <div class="container">
+    <div class="row">
+        <div class="col-md-6" style="padding-top: 3%;">
+            <img src="/media/images/{{a.image}}" alt="" height="250px" width="350px">
+        </div>
+        <div class="col-md-6">
+            <h2 style="padding-top: 6%; font-weight: 550; color: green;">Title: {{a.name}}</h2>
+            <h5 style="padding-top: 2%; font-weight: 550;">Uploader: {{a.user}}</h5>
+                <audio controls style="padding-top: 2%;">
+                    <source src="/media/{{a.file}}" type="audio/mp4">
+                </audio>
+            <div style="padding-top: 2%;">
+            <div class="row" style="padding-left: 3%;">
+             <a download href="/media/{{a.file}}" style="padding-left: 1%;"><button class="btn btn-outline-danger">Download Song</button></a>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+  {% endfor %}
+
+
+{% endblock %}

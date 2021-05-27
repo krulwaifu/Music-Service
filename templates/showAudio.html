@@ -1,29 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-<table class="fixed_headers">
-  <thead>
-    <tr>
-      <th>name</th>
-      <th>user</th>
-      <th>file</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for a in audios %}
-      <tr>
-          <td>{{a.name}}</td>
-          <td>{{a.user}}</td>
-          <td><audio controls style="padding-top: 2%;">
-                    <source src="/media/{{a.file}}" type="audio/mp4">
-                </audio>
-          </td>
-          <td>
-              <a download href="/media/{{a.file}}" style="padding-left: 1%;"><button class="btn btn-outline-danger">Download Song</button></a>
-          </td>
-      </tr>
-  {% endfor %}
-  </tbody>
-</table>
+    <h4>{{message}}</h4>
+<div class="row">
+      {% for a in audios %}
+            <div class="col-md-3">
+                <form class="text-center">
+                    <a href="/audio/{{a.name}}">
+                    <img style="width: 150px; max-width: 200px; border: 3px solid green; border-radius: 10px;" src="/media/images/{{a.image}}"><br>
+                    <h4 style="color: white">{{a.name}}</h4> <br>
+                    <h4 style="color: white">{{a.user}}</h4> <br>
+                    </a>
+                </form>
+             <a download href="/media/{{a.file}}" style="padding-left: 1%;"><button class="btn btn-outline-success">Download Song</button></a>
+                    <a href="/audio/delete/{{a.name}}" style="padding-left: 1%;"><button class="btn btn-outline-danger" style="margin-top: 10px;">Delete Song</button></a>
+            </div>
+    {% endfor %}
+</div>
 
 
 {% endblock %}

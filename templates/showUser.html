@@ -6,6 +6,7 @@
       <th>id</th>
       <th>username</th>
       <th>email</th>
+      <th>Link</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,7 @@
           <td>{{u.id}}</td>
           <td>{{u.username}}</td>
           <td>{{u.email}}</td>
+          <td><a href="/user/{{u.id}}">UserPage</a></td>
       </tr>
   {% endfor %}
   </tbody>

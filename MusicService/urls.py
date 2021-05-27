@@ -20,13 +20,13 @@ from django.urls import path
 
 from artist.views import art
 from accounts import views
-from accounts.views import music
-from audio.views import get_audio, upload, edit_name, delete, get_all_audio, musicpage
+from audio.views import get_audio, upload, edit_name, delete, get_all_audio, musicpage, get_audio_byUserId
 from django.conf import settings
 from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('home/',views.home),
     path('signin/', views.signIn),
     path('postsign/', views.postsign),
     path('logout/', views.logout, name="logout"),
@@ -40,7 +40,7 @@ urlpatterns = [
     path('audio/upload/',upload),
     path('audio/',get_all_audio),
     path('users/',views.get_all_users),
-    path('user/<str:id>',views.get_user),
+    path('user/<str:id>',get_audio_byUserId),
     path('user/delete/<str:id>',views.delete_user),
     path('user/edit/<str:id>/<str:new_username>',views.edit_name)
 ]

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  {% for u in users %}
+      <h2 style="padding-top: 6%; font-weight: 550; color: green;">Username: {{u.username}}</h2>
+      <h5 style="padding-top: 2%; font-weight: 550;">Email: {{u.email}}</h5>
+  {% endfor %}
+<div class="row">
+    {% for a in audios %}
+        <div class="col-md-3">
+            <form class="text-center">
+                <a href="/audio/{{a.name}}">
+                    <img style="width: 150px; max-width: 200px; border: 3px solid green; border-radius: 10px;" src="/media/images/{{a.image}}"><br>
+                    <h4 style="color: white">{{a.name}}</h4> <br>
+                    <h4 style="color: white">{{a.user}}</h4> <br>
+                </a>
+            </form>
+            <a download href="/media/{{a.file}}" style="padding-left: 1%;"><button class="btn btn-outline-success">Download Song</button></a>
+            <a href="/audio/delete/{{a.name}}" style="padding-left: 1%;"><button class="btn btn-outline-danger" style="margin-top: 10px;">Delete Song</button></a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

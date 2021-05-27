@@ -35,7 +35,7 @@ def postsign(request):
     print(user['idToken'])
     session_id=user['idToken']
     request.session['uid']=str(session_id)
-    return render(request,"welcome.html",{"e":email})
+    return render(request,"home.html",{"e":email})
 
 def logout(request):
     auth.logout(request)
@@ -78,7 +78,7 @@ def get_user(request,id):
         users = User.objects.get(id = int(id))
         list = [users]
         context = {'users': list,
-                   'title': 'audios'}
+                   'title': 'users'}
     return render(request,'showUser.html', context)
 def delete_user(request,id):
     if request.method == "GET":
@@ -94,3 +94,6 @@ def edit_name(request,id,new_username):
         users.username = new_username
         users.save(update_fields=["username"])
     return HttpResponse("User edited successfully")
+
+def home(request):
+    return render(request, "home.html")
