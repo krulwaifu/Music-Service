@@ -9,3 +9,7 @@ class Audio(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     file = models.FileField()
     image = models.FileField()
+
+class Transcription(models.Model):
+    audio = models.ForeignKey(Audio,on_delete=models.CASCADE,)
+    text = models.TextField()

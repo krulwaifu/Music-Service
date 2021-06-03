@@ -20,12 +20,14 @@ from django.urls import path
 
 from artist.views import art
 from accounts import views
-from audio.views import get_audio, upload, edit_name, delete, get_all_audio, musicpage, get_audio_byUserId
+from audio.views import get_audio, upload, edit_name, delete, get_all_audio, musicpage, get_audio_byUserId, \
+    speech_to_text, speech_to_text_save
 from django.conf import settings
 from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.home),
     path('home/',views.home),
     path('signin/', views.signIn),
     path('postsign/', views.postsign),
@@ -38,10 +40,12 @@ urlpatterns = [
     path('audio/edit/<str:name>/<str:new_name>',edit_name),
     path('audio/delete/<str:name>',delete),
     path('audio/upload/',upload),
+    path('audio/text/',speech_to_text),
+    path('audio/text/save/', speech_to_text_save),
     path('audio/',get_all_audio),
     path('users/',views.get_all_users),
     path('user/<str:id>',get_audio_byUserId),
     path('user/delete/<str:id>',views.delete_user),
-    path('user/edit/<str:id>/<str:new_username>',views.edit_name)
+    path('user/edit/<str:id>/<str:new_username>',views.edit_name),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

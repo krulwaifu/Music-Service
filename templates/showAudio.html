@@ -12,9 +12,16 @@
                     </a>
                 </form>
              <a download href="/media/{{a.file}}" style="padding-left: 1%;"><button class="btn btn-outline-success">Download Song</button></a>
-                    <a href="/audio/delete/{{a.name}}" style="padding-left: 1%;"><button class="btn btn-outline-danger" style="margin-top: 10px;">Delete Song</button></a>
+             <a href="/audio/delete/{{a.name}}" style="padding-left: 1%;"><button class="btn btn-outline-danger" style="margin-top: 10px;">Delete Song</button></a>
             </div>
     {% endfor %}
+            <div class="col-md-3">
+                <form class="text-center">
+                    <h4 style="color: white"></h4> <br>
+                    <h4 style="color: white"></h4> <br>
+                </form>
+             <a href="/audio/upload/" style="padding-left: 1%;"><button class="btn btn-outline-success">Upload Song</button></a>
+             </div>
 </div>
 
 
