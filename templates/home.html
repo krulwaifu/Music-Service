@@ -140,6 +140,9 @@
                   <li><a href="/admin"><p>Admin</p></a></li>
               </ul>
                 {% if user.is_authenticated %}
+                    <ul class="right">
+                        <li class="action-item"><a class="nav-link" href="/user/{{ user.id }}"><p>{{ user.username }}</p></a></li>
+                    </ul>
                 {% else %}
               <ul class="right">
                 <li><a href="/signin"><p>Log in</p></a></li>

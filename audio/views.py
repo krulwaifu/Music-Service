@@ -11,15 +11,19 @@ from django.template import RequestContext
 
 from audio.forms import AudioForm, TranscriptionFormC, TranscriptionFormS
 from audio.functions import handle_uploaded_file, delete_file, handle_uploaded_img, delete_img, convert_file, transcript
-from audio.models import Audio, Liked
+from audio.models import Audio, Liked, Transcription
 
 
 def get_audio(request,name):
     global response
     if request.method == "GET":
-        context = {'audios': Audio.objects.filter(name = name),
-                   'title': 'audios'}
-        return render(request, 'audioPage.html', context)
+        audio = Audio.objects.get(name = name)
+        try:
+            transcript = Transcription.objects.get(audio_id = audio.id)
+            return render(request, 'audioPage.html', {'audios': Audio.objects.filter(name=name),
+                                                      'transcript': transcript.text})
+        except:
+            return render(request, 'audioPage.html', {'audios': Audio.objects.filter(name = name)})
 def like(request, user_id, audio_id):
     global response
     if request.method == "GET":
