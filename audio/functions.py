@@ -2,6 +2,7 @@ import os
 import soundfile as sf
 import speech_recognition as sr
 
+
 def handle_uploaded_file(f):
     with open('media/' + f.name, 'wb+') as destination:
         for chunk in f.chunks():
@@ -36,3 +37,4 @@ def transcript(f):
         audio = recognizer.record(source)
     text = str(recognizer.recognize_google(audio,language="ru-RU"))
     return text
+

@@ -1,3 +1,6 @@
+from collections import Counter
+from statistics import mode
+
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 import json
@@ -8,7 +11,8 @@ from django.template import RequestContext
 
 from audio.forms import AudioForm, TranscriptionFormC, TranscriptionFormS
 from audio.functions import handle_uploaded_file, delete_file, handle_uploaded_img, delete_img, convert_file, transcript
-from audio.models import Audio
+from audio.models import Audio, Liked
+
 
 def get_audio(request,name):
     global response
@@ -16,17 +20,39 @@ def get_audio(request,name):
         context = {'audios': Audio.objects.filter(name = name),
                    'title': 'audios'}
         return render(request, 'audioPage.html', context)
+def like(request, user_id, audio_id):
+    global response
+    if request.method == "GET":
+        Liked.objects.create(user_id=int(user_id), audio_id=int(audio_id))
+        return render(request, 'home.html')
+def unlike(request,user_id, audio_id):
+    global response
+    if request.method == "GET":
+        unliked = Liked.objects.filter(user_id=int(user_id), audio_id=int(audio_id))
+        unliked.delete()
+        return render(request, 'home.html')
 def get_audio_byUserId(request,id):
     global response
     if request.method == "GET":
         User = get_user_model()
         users = User.objects.get(id=int(id))
         list = [users]
-        context1 = {'audios': Audio.objects.filter(user_id = id),
-                   'title': 'audizos'}
-        context = {'users': list,
-                   'title': 'users'}
-        return render(request, 'userPage.html', {'audios': Audio.objects.filter(user_id = id), 'users': list})
+        liked = Liked.objects.filter(user_id = int(id)).values_list('audio_id', flat=True)
+        liked_genre = []
+        liked_audio = []
+        for audio_id in liked:
+            liked_genre.append(Audio.objects.get(id = audio_id).genre)
+            liked_audio.append(Audio.objects.get(id = audio_id))
+        try:
+            most_liked = Counter(liked_genre).most_common(1)[0][0]
+            return render(request, 'userPage.html', {'audios': Audio.objects.filter(user_id=id),
+                                                     'users': list,
+                                                     'recommended': Audio.objects.order_by('?').filter(
+                                                         genre=most_liked)[:5],
+                                                     'liked': liked_audio})
+        except:
+            return render(request, 'userPage.html', {'audios': Audio.objects.filter(user_id = id),
+                                                 'users': list,})
 
 def get_all_audio(request):
     global response

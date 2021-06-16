@@ -1,27 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
     <h4>{{message}}</h4>
-<div class="row">
+<div class="row " style="border-radius: 10px;background-color: #2d1896;">
       {% for a in audios %}
-            <div class="col-md-3">
-                <form class="text-center">
+            <div class="col-md-3" style="padding: 20px">
+                <form class="text-center" style="margin-top: 10px">
                     <a href="/audio/{{a.name}}">
-                    <img style="width: 150px; max-width: 200px; border: 3px solid green; border-radius: 10px;" src="/media/images/{{a.image}}"><br>
+                    <img style="width: 250px; height: 300px; max-width: 250px;max-height: 300px;  border: 3px solid #8a8aff; border-radius: 10px;" src="/media/images/{{a.image}}"><br>
                     <h4 style="color: white">{{a.name}}</h4> <br>
                     <h4 style="color: white">{{a.user}}</h4> <br>
                     </a>
                 </form>
-             <a download href="/media/{{a.file}}" style="padding-left: 1%;"><button class="btn btn-outline-success">Download Song</button></a>
-             <a href="/audio/delete/{{a.name}}" style="padding-left: 1%;"><button class="btn btn-outline-danger" style="margin-top: 10px;">Delete Song</button></a>
+             <div style="text-align: center;">
+                 <a download href="/media/{{a.file}}" style=""><button class="btn btn-outline-success">Download Song</button></a>
+                <a href="/audio/delete/{{a.name}}" style=""><button class="btn btn-outline-danger" style="margin-top: 10px;">Delete Song</button></a>
+             </div>
             </div>
     {% endfor %}
-            <div class="col-md-3">
-                <form class="text-center">
-                    <h4 style="color: white"></h4> <br>
-                    <h4 style="color: white"></h4> <br>
+        <div style="text-align: center;padding-left: 1%;margin-top: 10px;margin-bottom: 10px">
+             <a href="/audio/upload/"><button class="btn btn-outline-success">+</button></a>
+        </div>
                 </form>
-             <a href="/audio/upload/" style="padding-left: 1%;"><button class="btn btn-outline-success">Upload Song</button></a>
-             </div>
+
 </div>
 
 

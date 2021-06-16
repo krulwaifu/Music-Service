@@ -19,9 +19,9 @@ from django.contrib import admin
 from django.urls import path
 
 from artist.views import art
-from accounts import views
+from accounts import views, forms
 from audio.views import get_audio, upload, edit_name, delete, get_all_audio, musicpage, get_audio_byUserId, \
-    speech_to_text, speech_to_text_save
+    speech_to_text, speech_to_text_save, like, unlike
 from django.conf import settings
 from django.contrib.staticfiles.urls import static
 
@@ -29,11 +29,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home),
     path('home/',views.home),
-    path('signin/', views.signIn),
-    path('postsign/', views.postsign),
-    path('logout/', views.logout, name="logout"),
-    path('signup/', views.signup, name="signup"),
-    path('postsignup/', views.postsignup, name="postsignup"),
+    path('signin/', views.login_view),
+    #path('postsign/', views.postsign),
+    path('logout/', views.logout),
+    path('signup/', views.register_view),
+    #path('postsignup/', views.postsignup, name="postsignup"),
     path('music/', musicpage, name="music"),
     path('artist/', art, name='art'),
     path('audio/<str:name>',get_audio),
@@ -47,5 +47,7 @@ urlpatterns = [
     path('user/<str:id>',get_audio_byUserId),
     path('user/delete/<str:id>',views.delete_user),
     path('user/edit/<str:id>/<str:new_username>',views.edit_name),
+    path('audio/like/<str:user_id>/<str:audio_id>',like),
+    path('audio/unlike/<str:user_id>/<str:audio_id>',unlike),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

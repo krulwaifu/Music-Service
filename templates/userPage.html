@@ -4,12 +4,12 @@
       <h2 style="padding-top: 6%; font-weight: 550; color: green;">Username: {{u.username}}</h2>
       <h5 style="padding-top: 2%; font-weight: 550;">Email: {{u.email}}</h5>
   {% endfor %}
-<div class="row">
+<div class="row"style="border-radius: 10px; background-color: #2d1896">
     {% for a in audios %}
-        <div class="col-md-3">
+        <div class="col-md-3" style="padding: 20px">
             <form class="text-center">
                 <a href="/audio/{{a.name}}">
-                    <img style="width: 150px; max-width: 200px; border: 3px solid green; border-radius: 10px;" src="/media/images/{{a.image}}"><br>
+                    <img style="width: 250px; height: 300px; max-width: 250px;max-height: 300px;  border: 3px solid #8a8aff; border-radius: 10px;" src="/media/images/{{a.image}}"><br>
                     <h4 style="color: white">{{a.name}}</h4> <br>
                     <h4 style="color: white">{{a.user}}</h4> <br>
                 </a>
@@ -19,4 +19,41 @@
         </div>
     {% endfor %}
 </div>
+    <br>
+    <h2 style="font-weight: 550;text-align: center">Liked Audios</h2>
+    <br>
+    <div class="row" style="border-radius: 10px; background-color: #2d1896">
+    {% for l in liked %}
+        <div class="col-md-3" style="padding: 20px">
+            <form class="text-center">
+                <a href="/audio/{{l.name}}">
+                    <img style="width: 250px; height: 300px; max-width: 250px;max-height: 300px;  border: 3px solid #8a8aff; border-radius: 10px;" src="/media/images/{{l.image}}"><br>
+                    <h4 style="color: white">{{l.name}}</h4> <br>
+                    <h4 style="color: white">{{l.user}}</h4> <br>
+                </a>
+            </form>
+            <a download href="/media/{{l.file}}" style="padding-left: 1%;"><button class="btn btn-outline-success">Download Song</button></a>
+            <a href="/audio/unlike/{{user.id}}/{{l.id}}" style="padding-left: 1%;"><button class="btn btn-outline-danger" style="margin-top: 10px;">Unlike Song</button></a>
+        </div>
+    {% endfor %}
+</div>
+    <br>
+    <h2 style="font-weight: 550;text-align: center">Recommended Audios</h2>
+    <br>
+    <div class="row" style="border-radius: 10px; background-color: #2d1896">
+    {% for r in recommended %}
+        <div class="col-md-3" style="padding: 20px">
+            <form class="text-center">
+                <a href="/audio/{{r.name}}">
+                    <img style="width: 250px; height: 300px; max-width: 250px;max-height: 300px;  border: 3px solid #8a8aff; border-radius: 10px;" src="/media/images/{{r.image}}"><br>
+                    <h4 style="color: white">{{r.name}}</h4> <br>
+                    <h4 style="color: white">{{r.user}}</h4> <br>
+                </a>
+            </form>
+            <a download href="/media/{{a.file}}" style="padding-left: 1%;"><button class="btn btn-outline-success">Download Song</button></a>
+            <a href="/audio/delete/{{a.name}}" style="padding-left: 1%;"><button class="btn btn-outline-danger" style="margin-top: 10px;">Delete Song</button></a>
+        </div>
+    {% endfor %}
+</div>
+
 {% endblock %}
